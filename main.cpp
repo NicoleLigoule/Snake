@@ -12,6 +12,7 @@ int main() {
 	}
 	sf::RectangleShape snake(sf::Vector2f(50, 50));
 	snake.setTexture(&snakeTexture);
+	snake.setOrigin(25, 25);
 
 	//Dot
 	sf::Texture dotTexture;
@@ -23,7 +24,7 @@ int main() {
 	dot.setPosition(150, 150);
 
 	// Snake speed and boolean from collision
-	float speed = 0.5f;
+	float speed = 0.2f;
 	bool collisionDetected = false;
 
 	while(window.isOpen()) {
@@ -37,15 +38,19 @@ int main() {
 
 		sf::Vector2f currentPosition = snake.getPosition();
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && currentPosition.x + snake.getSize().x < window.getSize().x) {
+			snake.setRotation(-90);
 			snake.move(speed, 0);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && currentPosition.x > 0) {
+			snake.setRotation(90);
 			snake.move(-speed, 0);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && currentPosition.y > 0) {
+			snake.setRotation(180);
 			snake.move(0, -speed);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && currentPosition.y + snake.getSize().y < window.getSize().y) {
+			snake.setRotation(0);
 			snake.move(0, speed);
 		}
 
